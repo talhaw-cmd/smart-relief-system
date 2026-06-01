@@ -1,0 +1,92 @@
+[
+  {
+    "shelter_name": "Community Hall North",
+    "location": "North District, Zone A",
+    "type": "Community Hall",
+    "capacity": 500,
+    "occupants": 320,
+    "manager": "Mr. Rahim",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "City Relief Camp",
+    "location": "Lahore, Johar Town",
+    "type": "Relief Camp",
+    "capacity": 800,
+    "occupants": 610,
+    "manager": "Ms. Ayesha",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "Government School Shelter",
+    "location": "Karachi, Malir",
+    "type": "School",
+    "capacity": 350,
+    "occupants": 290,
+    "manager": "Mr. Bilal",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "Central Medical Shelter",
+    "location": "Islamabad, G-10",
+    "type": "Medical Shelter",
+    "capacity": 200,
+    "occupants": 150,
+    "manager": "Dr. Sana",
+    "status": "Limited"
+  },
+  {
+    "shelter_name": "Punjab Emergency Camp",
+    "location": "Rawalpindi, Saddar",
+    "type": "Emergency Camp",
+    "capacity": 1000,
+    "occupants": 920,
+    "manager": "Mr. Farhan",
+    "status": "Full"
+  },
+  {
+    "shelter_name": "Flood Relief Center",
+    "location": "Multan, Cantt",
+    "type": "Relief Center",
+    "capacity": 600,
+    "occupants": 410,
+    "manager": "Mr. Usman",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "Women Protection Shelter",
+    "location": "Peshawar, Hayatabad",
+    "type": "Protection Shelter",
+    "capacity": 250,
+    "occupants": 180,
+    "manager": "Mrs. Nadia",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "Quetta Rescue Camp",
+    "location": "Quetta, Satellite Town",
+    "type": "Rescue Camp",
+    "capacity": 450,
+    "occupants": 370,
+    "manager": "Mr. Javed",
+    "status": "Open"
+  },
+  {
+    "shelter_name": "Swat Valley Shelter",
+    "location": "Swat, Mingora",
+    "type": "Temporary Shelter",
+    "capacity": 300,
+    "occupants": 260,
+    "manager": "Mr. Hamza",
+    "status": "Limited"
+  },
+  {
+    "shelter_name": "Hyderabad Safe Camp",
+    "location": "Hyderabad, Latifabad",
+    "type": "Safe Camp",
+    "capacity": 400,
+    "occupants": 220,
+    "manager": "Ms. Iqra",
+    "status": "Open"
+  }
+]

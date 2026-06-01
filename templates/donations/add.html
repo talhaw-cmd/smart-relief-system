@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Record Donation - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link active"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">{{ session.name[0] }}</div>
+                <div class="user-details">
+                    <p>{{ session.name }}</p>
+                    <span>{{ session.role }}</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Record Donation</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user">
+                    <div class="mini-avatar">{{ session.name[0] }}</div> {{ session.role }} ▾
+                </div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a><span class="sep">›</span>
+                <a href="/donations">Donations</a><span class="sep">›</span>
+                <span>Record Donation</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Record New Donation</h2>
+                    <p>Enter the details of the donation received</p>
+                </div>
+                <a href="/donations" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;">
+                <span>✓</span> Donation recorded successfully!
+            </div>
+
+            <form onsubmit="submitdonation(event)">
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">👤 Donor Information</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Donor Name <span class="required">*</span></label>
+                                <input type="text" id="donorName" class="form-control" placeholder="Full name or organization" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Donor Type <span class="required">*</span></label>
+                                <select id="donorType" class="form-control" required>
+                                    <option value="">-- Select Type --</option>
+                                    <option>Individual</option>
+                                    <option>Organization</option>
+                                    <option>Government Agency</option>
+                                    <option>International NGO</option>
+                                    <option>Religious Institution</option>
+                                    <option>Anonymous</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Contact Person</label>
+                                <input type="text" id="contactPerson" class="form-control" placeholder="Representative name" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Contact Number</label>
+                                <input type="tel" id="contactNumber" class="form-control" placeholder="+92-XXX-XXXX" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="donorEmail" class="form-control" placeholder="donor@email.com" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Country / Origin</label>
+                                <input type="text" id="donorCountry" class="form-control" placeholder="Country or city" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">💰 Donation Details</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Donation Type <span class="required">*</span></label>
+                                <select id="donationType" class="form-control" onchange="toggleDonationFields()" required>
+                                    <option value="">-- Select Type --</option>
+                                    <option value="monetary">Monetary (Cash / Bank Transfer)</option>
+                                    <option value="inkind">In-Kind (Goods / Supplies)</option>
+                                    <option value="food">Food Items</option>
+                                    <option value="medical">Medical Supplies</option>
+                                    <option value="clothing">Clothing / Textiles</option>
+                                    <option value="equipment">Equipment / Vehicles</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="monetaryFields" style="display:none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Amount <span class="required">*</span></label>
+                                    <input type="number" id="amount" class="form-control" placeholder="0.00" min="0" step="0.01" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Currency</label>
+                                    <select id="currency" class="form-control">
+                                        <option>PKR</option>
+                                        <option>USD</option>
+                                        <option>SAR</option>
+                                        <option>AED</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Payment Method</label>
+                                <select id="paymentMethod" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option>Cash</option>
+                                    <option>Bank Transfer</option>
+                                    <option>Cheque</option>
+                                    <option>Online Portal</option>
+                                    <option>Wire Transfer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="inkindFields" style="display:none;">
+                            <div class="form-group">
+                                <label class="form-label">Item Description <span class="required">*</span></label>
+                                <textarea id="itemDescription" class="form-control" rows="2" placeholder="e.g. 500 blankets, 200 raincoats"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Estimated Value (PKR)</label>
+                                    <input type="number" id="estimatedValue" class="form-control" placeholder="Approximate value" min="0" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Condition</label>
+                                    <select id="condition" class="form-control">
+                                        <option>New</option>
+                                        <option>Good Used Condition</option>
+                                        <option>Mixed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="margin-top:8px;">
+                            <div class="form-group">
+                                <label class="form-label">Designated For</label>
+                                <select id="designatedFor" class="form-control">
+                                    <option value="General">-- General Fund --</option>
+                                    <option>Flood Relief</option>
+                                    <option>Earthquake Response</option>
+                                    <option>Shelter Operations</option>
+                                    <option>Medical Aid</option>
+                                    <option>Food & Water</option>
+                                    <option>All Disasters</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date Received <span class="required">*</span></label>
+                                <input type="date" id="dateReceived" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Received By <span class="required">*</span></label>
+                                <input type="text" id="receivedBy" class="form-control" placeholder="Staff member name" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status <span class="required">*</span></label>
+                                <select id="donationStatus" class="form-control" required>
+                                    <option>Received</option>
+                                    <option>Pending</option>
+                                    <option>Utilized</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea id="notes" class="form-control" rows="2" placeholder="Additional notes..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">🧾 Receipt & Acknowledgment</span></div>
+                    <div class="card-body">
+                        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:12px;">
+                            <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                                <input type="checkbox" id="sendReceipt" /> Issue official receipt to donor
+                            </label>
+                            <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                                <input type="checkbox" /> Send acknowledgment email
+                            </label>
+                            <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                                <input type="checkbox" /> Donor wishes to remain anonymous
+                            </label>
+                        </div>
+                        <div class="form-group" id="receiptEmailGroup" style="display:none;">
+                            <label class="form-label">Receipt Email</label>
+                            <input type="email" class="form-control" placeholder="Email to send receipt to" />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Record Donation</button>
+                    <a href="/donations" class="btn btn-secondary">Cancel</a>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="../../static/javascript/donations.js"></script>
+</body>
+</html>

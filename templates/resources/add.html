@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Resource - SDRS</title>
+
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="wrapper">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+
+            <div class="brand-text">
+                <h3>Disaster Relief</h3>
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-label">Main Menu</div>
+
+            <a href="/dashboard" class="nav-link">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+
+            <a href="/disaster" class="nav-link">
+                <span class="nav-icon">🌪</span> Disaster Management
+            </a>
+
+            <a href="/victim" class="nav-link">
+                <span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management
+            </a>
+
+            <a href="/shelters" class="nav-link">
+                <span class="nav-icon">🏠</span> Shelter Management
+            </a>
+
+            <div class="nav-section-label" style="margin-top:8px;">
+                Operations
+            </div>
+
+            <a href="/volunteers" class="nav-link">
+                <span class="nav-icon">🙋</span> Volunteers
+            </a>
+
+            <a href="/donations" class="nav-link">
+                <span class="nav-icon">💰</span> Donations
+            </a>
+
+            <a href="/resources" class="nav-link active">
+                <span class="nav-icon">📦</span> Resources
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="user-info">
+
+                <div class="avatar">
+                    {{session.name[0]}}
+                </div>
+
+                <div class="user-details">
+                    <p>{{session.name}}</p>
+                    <span>{{session.role}}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <div class="main-content">
+
+        <nav class="top-navbar">
+
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Record Resources</span>
+            </div>
+
+            <div class="navbar-right">
+
+                <div class="navbar-badge">
+                    🔔
+                    <div class="badge-dot"></div>
+                </div>
+
+                <div class="navbar-user">
+                    <div class="mini-avatar">{{session.name[0]}}</div>
+                    {{session.role}} ▾
+                </div>
+
+                <button onclick="logout()" class="btn btn-secondary btn-sm">
+                    Logout
+                </button>
+
+            </div>
+
+        </nav>
+
+        <main class="page-content">
+
+            <div class="breadcrumb">
+
+                <a href="/dashboard">Dashboard</a>
+
+                <span class="sep">›</span>
+
+                <a href="/resources">Resources</a>
+
+                <span class="sep">›</span>
+
+                <span>Add Resources</span>
+
+            </div>
+
+            <div class="page-header">
+
+                <div class="page-header-left">
+                    <h2>Record New Recources</h2>
+                    <p>Enter Resources details</p>
+                </div>
+
+                <a href="/resources" class="btn btn-secondary">
+                    ← Back to List
+                </a>
+
+            </div>
+
+<form onsubmit="handleSubmit(event)">
+
+    <!-- Resource Information -->
+    <div class="card" style="margin-bottom:16px;">
+        <div class="card-header">
+            <span class="card-title">📦 Resource Information</span>
+        </div>
+
+        <div class="card-body">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">
+                        Resource Name <span class="required">*</span>
+                    </label>
+
+                    <input 
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        value=""
+                        placeholder="Emergency Food Ration Pack"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Category <span class="required">*</span>
+                    </label>
+
+                    <select value="" id="category" class="form-control" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Food">Food</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Shelter">Shelter</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Equipment">Equipment</option>
+                        <option value="Water">Water</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">
+                        Unit <span class="required">*</span>
+                    </label>
+
+                    <input 
+                        type="text"
+                        value=""
+                        id="unit"
+                        class="form-control"
+                        placeholder="Pack / Box / Kit"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Facility <span class="required">*</span>
+                    </label>
+
+                    <input 
+                        type="text"
+                        id="facility"
+                        class="form-control"
+                        placeholder="PDMA Lahore Warehouse"
+                        value=""
+                        required
+                    />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Stock Information -->
+    <div class="card" style="margin-bottom:16px;">
+        <div class="card-header">
+            <span class="card-title">📊 Stock Information</span>
+        </div>
+
+        <div class="card-body">
+
+            <div class="form-row-3">
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Stock <span class="required">*</span>
+                    </label>
+
+                    <input 
+                        type="number"
+                        id="stock"
+                        class="form-control"
+                        placeholder="15000"
+                        value=""
+                        min="0"
+                        required
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Allocated <span class="required">*</span>
+                    </label>
+
+                    <input 
+                        type="number"
+                        id="allocated"
+                        class="form-control"
+                        placeholder="12000"
+                        min="0"
+                        required
+                        value=""
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Status <span class="required">*</span>
+                    </label>
+
+                    <select value="" id="status" class="form-control" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Available">Available</option>
+                        <option value="Low Stock">Low Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+        <button type="submit" class="btn btn-primary">
+            ✓ Save Resource
+        </button>
+
+        <a href="/resources" class="btn btn-secondary">
+            Cancel
+        </a>
+    </div>
+
+</form>
+
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/resources.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Emergency Food Ration Pack",
+    "category": "Food",
+    "unit": "Pack",
+    "stock": 15000,
+    "allocated": 12000,
+    "facility": "PDMA Lahore Warehouse",
+    "status": "Available"
+  },
+  {
+    "name": "Family Shelter Tent",
+    "category": "Shelter",
+    "unit": "Unit",
+    "stock": 2500,
+    "allocated": 1800,
+    "facility": "NDMA Islamabad Depot",
+    "status": "Available"
+  },
+  {
+    "name": "Drinking Water Bottles (1L)",
+    "category": "Water",
+    "unit": "Bottle",
+    "stock": 50000,
+    "allocated": 42000,
+    "facility": "Sindh Relief Center Karachi",
+    "status": "Available"
+  },
+  {
+    "name": "Medical First Aid Kits",
+    "category": "Medical",
+    "unit": "Kit",
+    "stock": 3200,
+    "allocated": 2800,
+    "facility": "Rescue 1122 Multan Station",
+    "status": "Low Stock"
+  },
+  {
+    "name": "Blankets Winter Relief",
+    "category": "Non-Food Items",
+    "unit": "Piece",
+    "stock": 18000,
+    "allocated": 16000,
+    "facility": "PDMA Peshawar Store",
+    "status": "Available"
+  },
+  {
+    "name": "Hygiene Kits",
+    "category": "Health",
+    "unit": "Kit",
+    "stock": 9000,
+    "allocated": 7500,
+    "facility": "Alkhidmat Warehouse Lahore",
+    "status": "Available"
+  },
+  {
+    "name": "Life Jackets",
+    "category": "Rescue Equipment",
+    "unit": "Piece",
+    "stock": 1200,
+    "allocated": 950,
+    "facility": "NDMA River Response Unit Sukkur",
+    "status": "Available"
+  },
+  {
+    "name": "Temporary Relief Shelter Mats",
+    "category": "Shelter",
+    "unit": "Mat",
+    "stock": 14000,
+    "allocated": 11000,
+    "facility": "PDMA Quetta Storage",
+    "status": "Available"
+  },
+  {
+    "name": "Cooking Oil Bottles",
+    "category": "Food",
+    "unit": "Bottle",
+    "stock": 8000,
+    "allocated": 6000,
+    "facility": "Saylani Distribution Hub Karachi",
+    "status": "Available"
+  },
+  {
+    "name": "Generator Units (Small)",
+    "category": "Power Supply",
+    "unit": "Unit",
+    "stock": 450,
+    "allocated": 300,
+    "facility": "NDMA Central Warehouse Islamabad",
+    "status": "Limited"
+  },
+  {
+    "name": "Rice Bags (20kg)",
+    "category": "Food",
+    "unit": "Bag",
+    "stock": 22000,
+    "allocated": 20000,
+    "facility": "Punjab Food Relief Store Lahore",
+    "status": "Available"
+  },
+  {
+    "name": "Mosquito Nets",
+    "category": "Health Protection",
+    "unit": "Piece",
+    "stock": 30000,
+    "allocated": 25000,
+    "facility": "Sindh Health Relief Warehouse",
+    "status": "Available"
+  },
+  {
+    "name": "Portable Water Filtration Units",
+    "category": "Water",
+    "unit": "Unit",
+    "stock": 600,
+    "allocated": 420,
+    "facility": "UNICEF Pakistan Supply Hub",
+    "status": "Limited"
+  },
+  {
+    "name": "Emergency Medical Oxygen Cylinders",
+    "category": "Medical",
+    "unit": "Cylinder",
+    "stock": 900,
+    "allocated": 700,
+    "facility": "Islamabad Emergency Medical Center",
+    "status": "Available"
+  },
+  {
+    "name": "Plastic Tarpaulin Sheets",
+    "category": "Shelter",
+    "unit": "Sheet",
+    "stock": 11000,
+    "allocated": 9500,
+    "facility": "Balochistan Relief Warehouse Quetta",
+    "status": "Available"
+  }
+]

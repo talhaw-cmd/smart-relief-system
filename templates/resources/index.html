@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text">
+                <h3>Disaster Relief</h3>
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link active"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">{{ session.name[0] }}</div>
+                <div class="user-details">
+                    <p>{{ session.name }}</p>
+                    <span>{{ session.role }}</span>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <div class="main-content">
+
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Resource Management</span>
+            </div>
+
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user">
+                    <div class="mini-avatar">{{ session.name[0] }}</div>
+                    {{ session.role }} ▾
+                </div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <span>Resources</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Resources</h2>
+                    <p>Manage disaster relief inventory</p>
+                </div>
+
+                <a href="/addresource" class="btn btn-primary">+ Add Resource</a>
+            </div>
+
+            <!-- TABLE -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">All Resources</span>
+                    <span id="rowCount" style="font-size:12px; color:var(--text-muted);">Loading...</span>
+                </div>
+
+                <div class="card-body" style="padding:0;">
+                    <div class="table-container">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Unit</th>
+                                    <th>Stock</th>
+                                    <th>Allocated</th>
+                                    <th>Facility</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tableBody"></tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/resources.js"></script>
+<script>
+
+
+
+loadResources();
+</script>
+</body>
+</html>

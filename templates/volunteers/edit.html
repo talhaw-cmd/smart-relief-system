@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Volunteer - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link active"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">{{session.name[0]}}</div>
+                <div class="user-details"><p>{{session.name}}</p><span>{{session.role}}</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Edit Volunteer</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">{{session.name[0]}}</div> {{session.role}} ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a><span class="sep">›</span>
+                <a href="/volunteers">Volunteers</a><span class="sep">›</span>
+                <span>Edit Volunteer</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left"><h2>Edit Volunteer Record</h2><p>Update volunteer information</p></div>
+                <a href="/volunteers" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;"><span>✓</span> Record updated successfully!</div>
+
+            <form onsubmit="updatevolunteer(event)">
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">👤 Personal Information</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" class="form-control" value="{{ volunteer.first_name }}" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" class="form-control" value="{{ volunteer.last_name }}" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" id="dob" class="form-control" value="{{ volunteer.dob }}" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Gender</label>
+                                <select id="gender" class="form-control">
+                                    <option {% if volunteer.gender == "Male" %}selected{% endif %}>Male</option>
+                                    <option {% if volunteer.gender == "Female" %}selected{% endif %}>Female</option>
+                                    <option {% if volunteer.gender == "Other" %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" id="phone" class="form-control" value="{{ volunteer.phone }}" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" value="{{ volunteer.email }}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Address</label>
+                            <textarea id="address" class="form-control" rows="2">{{ volunteer.address }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">🛠 Skills & Assignment</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Primary Skill</label>
+                                <select id="skill" class="form-control">
+                                    <option {% if volunteer.skill == "Medical" %}selected{% endif %}>Medical</option>
+                                    <option {% if volunteer.skill == "Search & Rescue" %}selected{% endif %}>Search & Rescue</option>
+                                    <option {% if volunteer.skill == "Logistics" %}selected{% endif %}>Logistics</option>
+                                    <option {% if volunteer.skill == "Counseling" %}selected{% endif %}>Counseling</option>
+                                    <option {% if volunteer.skill == "Communications" %}selected{% endif %}>Communications</option>
+                                    <option {% if volunteer.skill == "Construction" %}selected{% endif %}>Construction</option>
+                                    <option {% if volunteer.skill == "Food Distribution" %}selected{% endif %}>Food Distribution</option>
+                                    <option {% if volunteer.skill == "Transportation" %}selected{% endif %}>Transportation</option>
+                                    <option {% if volunteer.skill == "General Support" %}selected{% endif %}>General Support</option>
+                                    <option {% if volunteer.skill == "Other" %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Organization</label>
+                                <input type="text" id="organization" class="form-control" value="{{ volunteer.organization }}" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Assigned Disaster</label>
+                                <select id="disaster" class="form-control">
+                                    <option value="" {% if volunteer.disaster == "" %}selected{% endif %}>-- No Assignment --</option>
+                                    <option {% if volunteer.disaster == "Flood - River Indus" %}selected{% endif %}>Flood - River Indus</option>
+                                    <option {% if volunteer.disaster == "Earthquake 6.2M" %}selected{% endif %}>Earthquake 6.2M</option>
+                                    <option {% if volunteer.disaster == "Tropical Cyclone" %}selected{% endif %}>Tropical Cyclone</option>
+                                    <option {% if volunteer.disaster == "Wildfire - Zone B" %}selected{% endif %}>Wildfire - Zone B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assigned Location</label>
+                                <input type="text" id="location" class="form-control" value="{{ volunteer.location }}" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" id="startDate" class="form-control" value="{{ volunteer.start_date }}" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Status</label>
+                                <select id="status" class="form-control">
+                                    <option {% if volunteer.status == "Available" %}selected{% endif %}>Available</option>
+                                    <option {% if volunteer.status == "Deployed" %}selected{% endif %}>Deployed</option>
+                                    <option {% if volunteer.status == "Off Duty" %}selected{% endif %}>Off Duty</option>
+                                    <option {% if volunteer.status == "Inactive" %}selected{% endif %}>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Qualifications</label>
+                            <textarea id="qualifications" class="form-control" rows="2">{{ volunteer.qualifications }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea id="notes" class="form-control" rows="2">{{ volunteer.notes }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Save Changes</button>
+                    <a href="/volunteers" class="btn btn-secondary">Cancel</a>
+                    <button type="button" class="btn btn-danger"
+                        onclick="if(confirm('Remove this volunteer?')) deleteVolunteer('{{ volunteer._id }}')">
+                        🗑 Remove
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="../../static/javascript/volunteers.js"></script>
+</body>
+</html>

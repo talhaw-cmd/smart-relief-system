@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Disaster - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link active"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">AU</div>
+                <div class="user-details"><p>Admin User</p><span>Administrator</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Register New Disaster</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">AU</div> Admin ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <a href="/disaster">Disaster Management</a>
+                <span class="sep">›</span>
+                <span>Register Disaster</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Register New Disaster</h2>
+                    <p>Fill in the details below to register a new disaster event</p>
+                </div>
+                <a href="/disaster" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;">
+                <span>✓</span> Disaster registered successfully! Redirecting...
+            </div>
+
+            <!-- Onsubmit Linked directly to your Javascript function -->
+            <form id="disasterForm" onsubmit="submitdisaster(event)">
+                <!-- Basic Info -->
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header">
+                        <span class="card-title">📋 Basic Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Disaster Name <span class="required">*</span></label>
+                                <input type="text" id="title" class="form-control" placeholder="e.g. Flood - River Delta" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Disaster Type <span class="required">*</span></label>
+                                <select id="type" class="form-control" required>
+                                    <option value="">-- Select Type --</option>
+                                    <option>Flood</option>
+                                    <option>Earthquake</option>
+                                    <option>Cyclone</option>
+                                    <option>Wildfire</option>
+                                    <option>Landslide</option>
+                                    <option>Drought</option>
+                                    <option>Tsunami</option>
+                                    <option>Tornado</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Severity Level <span class="required">*</span></label>
+                                <select id="severity" class="form-control" required>
+                                    <option value="">-- Select Severity --</option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                    <option>Extreme</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Status <span class="required">*</span></label>
+                                <select id="status" class="form-control" required>
+                                    <option value="">-- Select Status --</option>
+                                    <option>Critical</option>
+                                    <option>Active</option>
+                                    <option>Controlled</option>
+                                    <option>Resolved</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ✅ NEW: Location & Date Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Location <span class="required">*</span></label>
+                                <input type="text" id="loc" class="form-control" placeholder="e.g. Sindh, Pakistan" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Occurrence Date <span class="required">*</span></label>
+                                <input type="date" id="started_at" class="form-control" required />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Form Buttons -->
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Register Disaster</button>
+                    <a href="/disaster" class="btn btn-secondary">Cancel</a>
+                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/disaster.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Resource - SDRS</title>
+
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="wrapper">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+
+            <div class="brand-text">
+                <h3>Disaster Relief</h3>
+                <span>Management System</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-label">Main Menu</div>
+
+            <a href="/dashboard" class="nav-link">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+
+            <a href="/disaster" class="nav-link">
+                <span class="nav-icon">🌪</span> Disaster Management
+            </a>
+
+            <a href="/victim" class="nav-link">
+                <span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management
+            </a>
+
+            <a href="/shelters" class="nav-link">
+                <span class="nav-icon">🏠</span> Shelter Management
+            </a>
+
+            <div class="nav-section-label" style="margin-top:8px;">
+                Operations
+            </div>
+
+            <a href="/volunteers" class="nav-link">
+                <span class="nav-icon">🙋</span> Volunteers
+            </a>
+
+            <a href="/donations" class="nav-link">
+                <span class="nav-icon">💰</span> Donations
+            </a>
+
+            <a href="/resources" class="nav-link active">
+                <span class="nav-icon">📦</span> Resources
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+
+                <div class="avatar">
+                    {{session.name[0]}}
+                </div>
+
+                <div class="user-details">
+                    <p>{{session.name}}</p>
+                    <span>{{session.role}}</span>
+                </div>
+
+            </div>
+        </div>
+
+    </aside>
+
+    <div class="main-content">
+
+        <nav class="top-navbar">
+
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Edit Resource</span>
+            </div>
+
+            <div class="navbar-right">
+
+                <div class="navbar-badge">
+                    🔔
+                    <div class="badge-dot"></div>
+                </div>
+
+                <div class="navbar-user">
+                    <div class="mini-avatar">{{session.name[0]}}</div>
+                    {{session.role}} ▾
+                </div>
+
+                <button onclick="logout()" class="btn btn-secondary btn-sm">
+                    Logout
+                </button>
+
+            </div>
+        </nav>
+
+        <main class="page-content">
+
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+
+                <a href="/resources">Resources</a>
+                <span class="sep">›</span>
+
+                <span>Edit Resource</span>
+            </div>
+
+            <div class="page-header">
+
+                <div class="page-header-left">
+                    <h2>Edit Resource Record</h2>
+                    <p>Edit inventory details</p>
+                </div>
+
+                <a href="/resources" class="btn btn-secondary">
+                    ← Back to List
+                </a>
+
+            </div>
+
+            <form onsubmit="update(event)">
+
+                <div class="card" style="margin-bottom:16px;">
+
+                    <div class="card-header">
+                        <span class="card-title">📦 Resource Information</span>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Resource Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="resourceName"
+                                    class="form-control"
+                                    value="{{resource.name}}"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Category
+                                </label>
+
+                                <select
+                                    id="category"
+                                    class="form-control"
+                                    required
+                                >
+                                    <option value="{{resource.category}}">
+                                        {{resource.category}}
+                                    </option>
+
+                                    <option value="Food & Water">Food & Water</option>
+                                    <option value="Medical Supplies">Medical Supplies</option>
+                                    <option value="Shelter Materials">Shelter Materials</option>
+                                    <option value="Clothing">Clothing</option>
+                                    <option value="Equipment">Equipment</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Unit
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="unit"
+                                    class="form-control"
+                                    value="{{resource.unit}}"
+                                    required
+                                />
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Quantity
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    min="0"
+                                    class="form-control"
+                                    value="{{resource.stock}}"
+                                    required
+                                />
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Allocated
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="allocated"
+                                    class="form-control"
+                                    min="0"
+                                    value="{{resource.allocated}}"
+                                />
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="form-label">
+                                    Facility
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="facility"
+                                    class="form-control"
+                                    value="{{resource.facility}}"
+                                    required
+                                />
+
+                            </div>
+
+                                            <div class="form-group">
+                    <label class="form-label">
+                        Status <span class="required">*</span>
+                    </label>
+
+                    <select value="" id="status" class="form-control" required>
+                        <option value="">-- Select Status --</option>
+                        <option {%if resource.status == 'Available'%}    selected {%endif%} value="Available">Available</option>
+                        <option {%if resource.status == 'Low Stock'%}    selected {%endif%} value="Low Stock">Low Stock</option>
+                        <option {%if resource.status == 'Out of Stock'%} selected {%endif%} value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+
+                    <button type="submit" class="btn btn-primary">
+                        ✓ Save Changes
+                    </button>
+
+                    <a href="/resources" class="btn btn-secondary">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/resources.js"></script>
+
+</body>
+</html>

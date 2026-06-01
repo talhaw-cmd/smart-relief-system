@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Volunteer - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link active"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">{{session.name[0]}}</div>
+                <div class="user-details"><p>{{session.name}}</p><span>{{session.role}}</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Add Volunteer</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">{{session.name[0]}}</div> {{session.role}} ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a><span class="sep">›</span>
+                <a href="/volunteers">Volunteers</a><span class="sep">›</span>
+                <span>Add Volunteer</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left"><h2>Register New Volunteer</h2><p>Add a new volunteer to the relief team</p></div>
+                <a href="/volunteers" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;"><span>✓</span> Volunteer registered successfully!</div>
+
+            <form onsubmit="submitvolunteer(event)">
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">👤 Personal Information</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" class="form-control" placeholder="First name" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" class="form-control" placeholder="Last name" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" id="dob" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Gender <span class="required">*</span></label>
+                                <select id="gender" class="form-control" required>
+                                    <option value="">-- Select --</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone <span class="required">*</span></label>
+                                <input type="tel" id="phone" class="form-control" placeholder="+92-XXX-XXXX" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="email@example.com" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Address</label>
+                            <textarea id="address" class="form-control" rows="2" placeholder="Home address"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">🛠 Skills & Assignment</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Primary Skill <span class="required">*</span></label>
+                                <select id="skill" class="form-control" required>
+                                    <option value="">-- Select Skill --</option>
+                                    <option>Medical</option>
+                                    <option>Search & Rescue</option>
+                                    <option>Logistics</option>
+                                    <option>Counseling</option>
+                                    <option>Communications</option>
+                                    <option>Construction</option>
+                                    <option>Food Distribution</option>
+                                    <option>Transportation</option>
+                                    <option>General Support</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Organization</label>
+                                <input type="text" id="organization" class="form-control" placeholder="NGO or affiliation" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Assigned Disaster</label>
+                                <select id="disaster" class="form-control">
+                                    <option value="">-- No Assignment --</option>
+                                    <option>Flood - River Indus</option>
+                                    <option>Earthquake 6.2M</option>
+                                    <option>Tropical Cyclone</option>
+                                    <option>Wildfire - Zone B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assigned Location</label>
+                                <input type="text" id="location" class="form-control" placeholder="Shelter or field location" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Start Date <span class="required">*</span></label>
+                                <input type="date" id="startDate" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Status</label>
+                                <select id="status" class="form-control">
+                                    <option>Available</option>
+                                    <option>Deployed</option>
+                                    <option>Off Duty</option>
+                                    <option>Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Qualifications</label>
+                            <textarea id="qualifications" class="form-control" rows="2" placeholder="Skills, certifications..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea id="notes" class="form-control" rows="2" placeholder="Additional info..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Register Volunteer</button>
+                    <a href="/volunteers" class="btn btn-secondary">Cancel</a>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="../../static/javascript/volunteers.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+[
+  {
+    "name": "Muhammad Asif",
+    "age": 28,
+    "gender": "male",
+    "contact": "03011234567",
+    "status": "missing",
+    "medical_info": "unknown (flood affected area)",
+    "location": "Swat Valley",
+    "incident_type": "flood",
+    "created_at": "2025-08-16T10:30:00"
+  },
+  {
+    "name": "Hina Khalid",
+    "age": 24,
+    "gender": "female",
+    "contact": "03111234567",
+    "status": "rescued",
+    "medical_info": "dehydration and shock",
+    "location": "Buner",
+    "incident_type": "flood",
+    "created_at": "2025-08-15T09:15:00"
+  },
+  {
+    "name": "Abdul Rehman",
+    "age": 37,
+    "gender": "male",
+    "contact": "03211234567",
+    "status": "missing",
+    "medical_info": "unknown",
+    "location": "Lahore (Ravi River belt)",
+    "incident_type": "flood",
+    "created_at": "2025-08-27T06:45:00"
+  },
+  {
+    "name": "Sana Iqbal",
+    "age": 21,
+    "gender": "female",
+    "contact": "03311234567",
+    "status": "rescued",
+    "medical_info": "minor injuries",
+    "location": "Karachi",
+    "incident_type": "urban flood",
+    "created_at": "2025-08-20T14:10:00"
+  },
+  {
+    "name": "Usman Ali",
+    "age": 33,
+    "gender": "male",
+    "contact": "03411234567",
+    "status": "deceased",
+    "medical_info": "severe trauma",
+    "location": "Quetta",
+    "incident_type": "flash flood",
+    "created_at": "2025-07-18T18:00:00"
+  },
+  {
+    "name": "Fatima Noor",
+    "age": 19,
+    "gender": "female",
+    "contact": "03021234567",
+    "status": "rescued",
+    "medical_info": "pregnant, stable condition",
+    "location": "Hyderabad",
+    "incident_type": "storm",
+    "created_at": "2025-03-10T07:40:00"
+  },
+  {
+    "name": "Ali Raza",
+    "age": 29,
+    "gender": "male",
+    "contact": "03121234567",
+    "status": "missing",
+    "medical_info": "unknown",
+    "location": "Sukkur",
+    "incident_type": "river flood",
+    "created_at": "2025-09-05T11:20:00"
+  },
+  {
+    "name": "Zainab Hussain",
+    "age": 26,
+    "gender": "female",
+    "contact": "03221234567",
+    "status": "rescued",
+    "medical_info": "fractured leg",
+    "location": "Multan",
+    "incident_type": "fire incident",
+    "created_at": "2025-04-11T16:00:00"
+  },
+  {
+    "name": "Hassan Tariq",
+    "age": 40,
+    "gender": "male",
+    "contact": "03321234567",
+    "status": "missing",
+    "medical_info": "unknown",
+    "location": "Attock",
+    "incident_type": "flood",
+    "created_at": "2025-05-08T08:10:00"
+  },
+  {
+    "name": "Iqra Saleem",
+    "age": 23,
+    "gender": "female",
+    "contact": "03421234567",
+    "status": "rescued",
+    "medical_info": "healthy",
+    "location": "Islamabad",
+    "incident_type": "hailstorm",
+    "created_at": "2025-04-16T12:30:00"
+  },
+  {
+    "name": "Bilal Ahmed",
+    "age": 31,
+    "gender": "male",
+    "contact": "03031234567",
+    "status": "deceased",
+    "medical_info": "burn injuries",
+    "location": "Faisalabad",
+    "incident_type": "industrial fire",
+    "created_at": "2025-03-25T12:45:00"
+  },
+  {
+    "name": "Maryam Khan",
+    "age": 22,
+    "gender": "female",
+    "contact": "03131234567",
+    "status": "missing",
+    "medical_info": "unknown",
+    "location": "Chitral",
+    "incident_type": "glacial flood risk",
+    "created_at": "2025-07-22T05:00:00"
+  },
+  {
+    "name": "Omar Farooq",
+    "age": 35,
+    "gender": "male",
+    "contact": "03231234567",
+    "status": "rescued",
+    "medical_info": "stable",
+    "location": "Gwadar",
+    "incident_type": "earthquake tremor",
+    "created_at": "2025-04-03T04:25:00"
+  },
+  {
+    "name": "Ayesha Malik",
+    "age": 25,
+    "gender": "female",
+    "contact": "03331234567",
+    "status": "missing",
+    "medical_info": "unknown",
+    "location": "Swat",
+    "incident_type": "flash flood",
+    "created_at": "2025-08-16T09:00:00"
+  },
+  {
+    "name": "Saad Javed",
+    "age": 38,
+    "gender": "male",
+    "contact": "03431234567",
+    "status": "rescued",
+    "medical_info": "heart patient",
+    "location": "Punjab (multiple districts)",
+    "incident_type": "super flood",
+    "created_at": "2025-08-26T00:00:00"
+  }
+]

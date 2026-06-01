@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">Edit Shelter - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><span class="brand-icon">🚨</span><div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div></div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link active"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer"><div class="user-info"><div class="avatar">AU</div><div class="user-details"><p>{{session.name}}</p><span>{{session.role}}</span></div></div></div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left"><button class="menu-toggle" onclick="toggleSidebar()">☰</button><span class="page-title">Edit Shelter</span></div>
+            <div class="navbar-right"><div class="navbar-badge">🔔<div class="badge-dot"></div></div><div class="navbar-user"><div class="mini-avatar">{{session.name[0]}}</div> {{session.role}} ▾</div><button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button></div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb"><a href="/dashboard">Dashboard</a><span class="sep">›</span><a href="/shelters">Shelter Management</a><span class="sep">›</span><span>Edit Shelter</span></div>
+
+            <div class="page-header">
+                <div class="page-header-left"><h2>Edit Shelter Record</h2>
+                    <p id="shelterSubtitle">Loading...</p>
+                </div>
+                <a href="/shelters" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;"><span>✓</span> Shelter updated successfully! Redirecting...</div>
+
+            <form onsubmit="update(event)">
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">🏠 Shelter Information</span></div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Shelter Name <span class="required">*</span></label>
+                                <input type="text" value="{{shelterdata.shelter_name}}" id="shelterName" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Facility Type <span class="required">*</span></label>
+                                <select value="" id="facilityType" class="form-control" required>
+                                    <option {% if shelterdata.type == "Community Hall"%}     selected {%endif%} value="Community Hall">Community Hall</option>
+                                    <option {% if shelterdata.type == "School"%}             selected {%endif%} value="School">School</option>
+                                    <option {% if shelterdata.type == "Sports Facility"%}    selected {%endif%} value="Sports Facility">Sports Facility</option>
+                                    <option {% if shelterdata.type == "Government Building"%}selected {%endif%} value="Government Building">Government Building</option>
+                                    <option {% if shelterdata.type == "University Building"%}selected {%endif%} value="University Building">University Building</option>
+                                    <option {% if shelterdata.type == "Warehouse"%}          selected {%endif%} value="Warehouse">Warehouse</option>
+                                    <option {% if shelterdata.type == "Tent Camp"%}          selected {%endif%} value="Tent Camp">Tent Camp</option>
+                                    <option {% if shelterdata.type == "Other"%}              selected {%endif%} value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Total Capacity <span class="required">*</span></label>
+                                <input type="number" id="capacity" value="{{shelterdata.capacity}}" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Occupants</label>
+                                <input type="number" value="{{shelterdata.occupants}}" id="occupants" class="form-control" />
+                                <p class="form-hint">Current people staying in this shelter</p>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Current Status <span class="required">*</span></label>
+                                <select value="" id="status" class="form-control" required>
+                                    <option {% if shelterdata.status == "Open"%}     selected {%endif%} value="Open">Open</option>
+                                    <option {% if shelterdata.status == "Almost Full"%}     selected {%endif%} value="Almost Full">Almost Full</option>
+                                    <option {% if shelterdata.status == "Full"%}     selected {%endif%} value="Full">Full</option>
+                                    <option {% if shelterdata.status == "Standby"%}     selected {%endif%} value="Standby">Standby</option>
+                                    <option {% if shelterdata.status == "Closed"%}     selected {%endif%} value="Closed">Closed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Shelter Manager Name</label>
+                            <input type="text" id="managerName" value="{{shelterdata.manager}}" class="form-control"/>
+                        </div>
+                                <div class="form-group">
+                                <label class="form-label">District / City <span class="required">*</span></label>
+                                <input type="text" value="{{shelterdata.location}}" id="district" class="form-control" required />
+                            </div>
+
+                    </div>
+                </div>
+
+
+
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Save Changes</button>
+                    <a href="/shelters" class="btn btn-secondary">Cancel</a>
+                    <button type="button" class="btn btn-danger" onclick="if(confirm('Delete this shelter?')) window.location.href='/shelters'">🗑 Delete</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="../../static/javascript/shelter.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

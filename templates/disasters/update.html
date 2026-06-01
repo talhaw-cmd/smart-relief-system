@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Disaster - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link active"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">AU</div>
+                <div class="user-details"><p>Admin User</p><span>Administrator</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Edit Disaster Record</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">AU</div> Admin ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <a href="/disaster">Disaster Management</a>
+                <span class="sep">›</span>
+                <span>Edit Disaster</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Edit Disaster Record</h2>
+                    <p>Update the details of the selected disaster event</p>
+                </div>
+                <a href="/disaster" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;">
+                <span>✓</span> Record updated successfully! Redirecting...
+            </div>
+
+            <!-- onsubmit calls updatedisaster() from disaster.js -->
+            <form id="editForm" onsubmit="updatedisaster(event)">
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header">
+                        <span class="card-title">📋 Basic Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Disaster Name <span class="required">*</span></label>
+                                <!-- Jinja2: pre-fill from Flask -->
+                                <input type="text" id="title" class="form-control" value="{{ disaster.title }}" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Disaster Type <span class="required">*</span></label>
+                                <select id="type" class="form-control" required>
+                                    <option value="">-- Select Type --</option>
+                                    <option value="flood" {% if disaster.type == 'flood' %}selected{% endif %}>Flood</option>
+                                    <option value="earthquake" {% if disaster.type == 'earthquake' %}selected{% endif %}>Earthquake</option>
+                                    <option value="cyclone" {% if disaster.type == 'cyclone' %}selected{% endif %}>Cyclone</option>
+                                    <option value="wildfire" {% if disaster.type == 'wildfire' %}selected{% endif %}>Wildfire</option>
+                                    <option value="landslide" {% if disaster.type == 'landslide' %}selected{% endif %}>Landslide</option>
+                                    <option value="drought" {% if disaster.type == 'drought' %}selected{% endif %}>Drought</option>
+                                    <option value="tsunami" {% if disaster.type == 'tsunami' %}selected{% endif %}>Tsunami</option>
+                                    <option value="tornado" {% if disaster.type == 'tornado' %}selected{% endif %}>Tornado</option>
+                                    <option value="other" {% if disaster.type == 'other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Severity Level <span class="required">*</span></label>
+                                <select id="severity" class="form-control" required>
+                                    <option value="">-- Select Severity --</option>
+                                    <option value="low" {% if disaster.severity == 'low' %}selected{% endif %}>Low</option>
+                                    <option value="medium" {% if disaster.severity == 'medium' %}selected{% endif %}>Medium</option>
+                                    <option value="high" {% if disaster.severity == 'high' %}selected{% endif %}>High</option>
+                                    <option value="extreme" {% if disaster.severity == 'extreme' %}selected{% endif %}>Extreme</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Current Status <span class="required">*</span></label>
+                                <select id="status" class="form-control" required>
+                                    <option value="">-- Select Status --</option>
+                                    <option value="critical" {% if disaster.status == 'critical' %}selected{% endif %}>Critical</option>
+                                    <option value="active" {% if disaster.status == 'active' %}selected{% endif %}>Active</option>
+                                    <option value="controlled" {% if disaster.status == 'controlled' %}selected{% endif %}>Controlled</option>
+                                    <option value="resolved" {% if disaster.status == 'resolved' %}selected{% endif %}>Resolved</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Location <span class="required">*</span></label>
+                                <input type="text" id="loc" class="form-control" value="{{ disaster.location }}" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Occurrence Date <span class="required">*</span></label>
+                                <input type="date" id="started_at" class="form-control" value="{{disaster.started_at}}" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Save Changes</button>
+                    <a href="/disaster" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/disaster.js"></script>
+</body>
+</html>

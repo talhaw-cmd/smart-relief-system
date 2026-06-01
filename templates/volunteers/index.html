@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volunteers - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link active"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">{{session.name[0]}}</div>
+                <div class="user-details"><p>{{session.name}}</p><span>{{session.role}}</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Volunteer Management</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">{{session.name[0]}}</div> {{session.role}} ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <span>Volunteer Management</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Volunteers</h2>
+                    <p>Manage all registered volunteers and their assignments</p>
+                </div>
+                <a href="/addvolunteer" class="btn btn-primary">+ Add Volunteer</a>
+            </div>
+
+            <div class="stats-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:20px;">
+                <div class="stat-card"><div class="stat-icon green">🙋</div><div class="stat-info"><p id="totalCount">{{totalvol}}</p><span>Total Registered</span></div></div>
+                <div class="stat-card"><div class="stat-icon blue">✅</div><div class="stat-info"><p id="deployedCount">{{busy}}</p><span>Busy</span></div></div>
+                <div class="stat-card"><div class="stat-icon yellow">⏳</div><div class="stat-info"><p id="availableCount">{{activevol}}</p><span>Available</span></div></div>
+                <div class="stat-card"><div class="stat-icon red">⚠</div><div class="stat-info"><p id="offdutyCount">{{offvol}}</p><span>Off Duty</span></div></div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px;">
+                <div class="card-body" style="padding:14px 20px;">
+                    <div class="filter-bar">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" placeholder="Search by name, skill..." onkeyup="filterTable()" />
+                        </div>
+                        <select class="form-control" style="width:160px;" id="statusFilter" onchange="filterTable()">
+                            <option value="">All Statuses</option>
+                            <option>Deployed</option>
+                            <option>Available</option>
+                            <option>Off Duty</option>
+                            <option>Inactive</option>
+                        </select>
+                        <select class="form-control" style="width:160px;" id="skillFilter" onchange="filterTable()">
+                            <option value="">All Skills</option>
+                            <option>Medical</option>
+                            <option>Search & Rescue</option>
+                            <option>Logistics</option>
+                            <option>Counseling</option>
+                            <option>Communications</option>
+                            <option>Construction</option>
+                        </select>
+                        <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">All Volunteers</span>
+                    <span style="font-size:12px; color:var(--text-muted);" id="rowCount">Loading...</span>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Contact</th>
+                                    <th>Skill</th>
+                                    <th>Location</th>
+                                    <th>Organization</th>
+                                    <th>Start Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="../../static/javascript/volunteers.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Victim - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link active"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">AU</div>
+                <div class="user-details"><p>Admin User</p><span>Administrator</span></div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Add Victim Record</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user"><div class="mini-avatar">AU</div> Admin ▾</div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <a href="/victim">Victim Management</a>
+                <span class="sep">›</span>
+                <span>Add Victim</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Register New Victim</h2>
+                    <p>Fill in victim details carefully for accurate records</p>
+                </div>
+                <a href="/victim" class="btn btn-secondary">← Back to List</a>
+            </div>
+
+            <div class="alert alert-success" id="successMsg" style="display:none;">
+                <span>✓</span> Victim record added successfully! Redirecting...
+            </div>
+
+            <!-- onsubmit calls submitvictim() from victim.js -->
+            <form id="victimForm" onsubmit="submitvictim(event)">
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-header">
+                        <span class="card-title">👤 Personal Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name <span class="required">*</span></label>
+                                <input type="text" id="name" class="form-control" placeholder="Full name" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Age <span class="required">*</span></label>
+                                <input type="number" id="age" class="form-control" placeholder="Age" min="0" required />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Gender <span class="required">*</span></label>
+                                <select id="gender" class="form-control" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Contact Number</label>
+                                <input type="tel" id="contact" class="form-control" placeholder="+92-XXX-XXXXXXX" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Current Status <span class="required">*</span></label>
+                                <select id="status" class="form-control" required>
+                                    <option value="">-- Select Status --</option>
+                                    <option value="In Shelter">In Shelter</option>
+                                    <option value="Relocated">Relocated</option>
+                                    <option value="Missing">Missing</option>
+                                    <option value="Deceased">Deceased</option>
+                                    <option value="Medical Care">Medical Care</option>
+                                    <option value="Recovered">Recovered</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Medical Info</label>
+                                <input type="text" id="medical_info" class="form-control" placeholder="Any medical conditions or special needs" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" class="btn btn-primary">✓ Save Victim Record</button>
+                    <a href="/victim" class="btn btn-secondary">Cancel</a>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>Q
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/victim.js"></script>
+</body>
+</html>

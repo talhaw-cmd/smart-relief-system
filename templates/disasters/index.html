@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disaster Management - SDRS</title>
+    <link rel="stylesheet" href="../../static/stylesheet/style.css" />
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="wrapper">
+
+    <!-- Sidebar Section -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🚨</span>
+            <div class="brand-text"><h3>Disaster Relief</h3><span>Management System</span></div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main Menu</div>
+            <a href="/dashboard" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+            <a href="/disaster" class="nav-link active"><span class="nav-icon">🌪</span> Disaster Management</a>
+            <a href="/victim" class="nav-link"><span class="nav-icon">🧑‍🤝‍🧑</span> Victim Management</a>
+            <a href="/shelters" class="nav-link"><span class="nav-icon">🏠</span> Shelter Management</a>
+            <div class="nav-section-label" style="margin-top:8px;">Operations</div>
+            <a href="/volunteers" class="nav-link"><span class="nav-icon">🙋</span> Volunteers</a>
+            <a href="/donations" class="nav-link"><span class="nav-icon">💰</span> Donations</a>
+            <a href="/resources" class="nav-link"><span class="nav-icon">📦</span> Resources</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar" id="sidebarInitials">{{session.name[0]}}</div>
+                <div class="user-details">
+                    <p id="sidebarName">{{session.name}}</p>
+                    <span id="sidebarRole">{{session.role}}</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <span class="page-title">Disaster Management</span>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-badge">🔔<div class="badge-dot"></div></div>
+                <div class="navbar-user">
+                    <div class="mini-avatar" id="navInitials">{{session.name[0]}}</div> 
+                    <span id="navName">{{session.role}}</span> ▾
+                </div>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <main class="page-content">
+            <div class="breadcrumb">
+                <a href="/dashboard">Dashboard</a>
+                <span class="sep">›</span>
+                <span>Disaster Management</span>
+            </div>
+
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h2>Disaster Events</h2>
+                    <p>Manage and track all registered disaster events</p>
+                </div>
+                <a href="/adddisaster" class="btn btn-primary">+ Register Disaster</a>
+            </div>
+
+            <!-- Dashboard / Status Cards Dynamic Integration -->
+            <div class="stats-grid" style="grid-template-columns: repeat(4,1fr); margin-bottom:20px;">
+                <div class="stat-card">
+                    <div class="stat-icon red">🌪</div>
+                    <div class="stat-info"><p id="stat_total_active">{{active}}</p><span>Total Active</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon yellow">⚠</div>
+                    <div class="stat-info"><p id="stat_critical">{{critical}}</p><span>Critical</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue">📋</div>
+                    <div class="stat-info"><p id="stat_controlled">{{controlled}}</p><span>Under Control</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <div class="stat-info"><p id="stat_resolved">{{resolved}}</p><span>Resolved</span></div>
+                </div>
+            </div>
+
+            <!-- Filters Area -->
+            <div class="card" style="margin-bottom:16px;">
+                <div class="card-body" style="padding:14px 20px;">
+                    <div class="filter-bar">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" placeholder="Search by name or location..." onkeyup="filterTable()" />
+                        </div>
+                        <select class="form-control" style="width:160px;" id="typeFilter" onchange="filterTable()">
+                            <option value="">All Types</option>
+                            <option>Flood</option>
+                            <option>Earthquake</option>
+                            <option>Cyclone</option>
+                            <option>Wildfire</option>
+                            <option>Landslide</option>
+                            <option>Drought</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="form-control" style="width:160px;" id="statusFilter" onchange="filterTable()">
+                            <option value="">All Statuses</option>
+                            <option>Critical</option>
+                            <option>Active</option>
+                            <option>Controlled</option>
+                            <option>Resolved</option>
+                        </select>
+                        <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disasters Table Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">All Disaster Events</span>
+                    <span style="font-size:12px; color:var(--text-muted);" id="rowCount">Loading records...</span>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="table-container">
+                        <table id="disasterTable">
+                            <thead>
+                                <tr>
+                                    <th>Disaster Name</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Severity</th>
+                                    <th>Status</th>
+                                    <th>Started at</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                    <div style="padding:12px 16px;">
+                        <div class="pagination">
+                            <span id="paginationInfo">Showing 0-0 of 0 records</span>
+                            <div class="page-btns">
+                                <div class="page-btn active">1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="../../static/javascript/disaster.js"></script>
+<script>
+
+const tableBodyContainer = document.getElementById("tableBody") || document.getElementById("disaster-body");
+
+
+function edit() {
+    fetch("/editdisaster", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => console.log(err));
+}
+
+
+fetch("/disasterdata")
+    .then(res => res.json())
+    .then(disasterList => {
+        disasterList.forEach(disasterItem => {
+            const recordId = disasterItem._id || disasterItem.id;
+
+            tableBodyContainer.innerHTML += `
+                <tr>
+                    <td class="disaster-title">${disasterItem.title}</td>
+                    <td style="color: var(--text-2);">${disasterItem.type}</td>
+                    <td style="font-weight: 500;">
+                        <span style="color: var(--primary-main); margin-right: 4px;">📍</span>${disasterItem.location}
+                    </td>
+                    <td>
+                        <span class="status-badge" style="background: var(--orange-bg); color: var(--orange-text);">
+                            ${disasterItem.severity}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status-badge active-status">${disasterItem.status}</span>
+                    </td>
+                    <td style="color: var(--text-3); font-size: 12.5px;">${disasterItem.started_at}</td>
+                    <td>
+                        <button onclick="window.location.href = '/editdisaster/${recordId}'" class="edit-btn">
+                            Edit Details
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    })
+    .catch(err => console.log(err));
+</script>
+</body>
+</html>

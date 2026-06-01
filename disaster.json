@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Punjab Super Flood Emergency 2025",
+    "type": "flood",
+    "location": "Punjab (Multiple Districts)",
+    "severity": "high",
+    "status": "active",
+    "started_at": "2025-08-26T00:00:00"
+  },
+  {
+    "title": "Khyber Pakhtunkhwa Cloudburst Flood Crisis",
+    "type": "flood",
+    "location": "KPK (Buner, Swat, Bajaur)",
+    "severity": "high",
+    "status": "active",
+    "started_at": "2025-08-15T00:00:00"
+  },
+  {
+    "title": "Sindh Monsoon Urban Flooding",
+    "type": "flood",
+    "location": "Karachi, Hyderabad, Sukkur",
+    "severity": "medium",
+    "status": "active",
+    "started_at": "2025-08-20T00:00:00"
+  },
+  {
+    "title": "Ravi River Overflow Flood Lahore",
+    "type": "flood",
+    "location": "Lahore, Kasur, Narowal",
+    "severity": "high",
+    "status": "resolved",
+    "started_at": "2025-08-27T00:00:00"
+  },
+  {
+    "title": "Balochistan Flash Floods After Heavy Rain",
+    "type": "flood",
+    "location": "Quetta, Khuzdar, Gwadar",
+    "severity": "medium",
+    "status": "active",
+    "started_at": "2025-07-18T00:00:00"
+  },
+  {
+    "title": "Murree & Galiyat Snowstorm Disruption",
+    "type": "storm",
+    "location": "Murree, Abbottabad, Nathiagali",
+    "severity": "medium",
+    "status": "resolved",
+    "started_at": "2025-01-15T00:00:00"
+  },
+  {
+    "title": "Karachi Heatwave Emergency",
+    "type": "storm",
+    "location": "Karachi",
+    "severity": "high",
+    "status": "resolved",
+    "started_at": "2025-06-10T00:00:00"
+  },
+  {
+    "title": "Islamabad Severe Hailstorm Damage",
+    "type": "storm",
+    "location": "Islamabad, Rawalpindi",
+    "severity": "medium",
+    "status": "resolved",
+    "started_at": "2025-04-16T00:00:00"
+  },
+  {
+    "title": "Quetta Earthquake Tremors Alert",
+    "type": "earthquake",
+    "location": "Quetta, Zhob",
+    "severity": "medium",
+    "status": "active",
+    "started_at": "2025-05-05T03:10:00"
+  },
+  {
+    "title": "Gwadar Coastal Seismic Activity",
+    "type": "earthquake",
+    "location": "Gwadar, Makran Coast",
+    "severity": "low",
+    "status": "resolved",
+    "started_at": "2025-04-03T04:25:00"
+  },
+  {
+    "title": "Faisalabad Industrial Fire Incident",
+    "type": "fire",
+    "location": "Faisalabad Industrial Area",
+    "severity": "high",
+    "status": "resolved",
+    "started_at": "2025-03-25T12:45:00"
+  },
+  {
+    "title": "Multan Warehouse Fire Emergency",
+    "type": "fire",
+    "location": "Multan",
+    "severity": "medium",
+    "status": "resolved",
+    "started_at": "2025-04-11T16:00:00"
+  },
+  {
+    "title": "Swat Valley Flash Flood Landslide Event",
+    "type": "flood",
+    "location": "Swat Valley",
+    "severity": "high",
+    "status": "active",
+    "started_at": "2025-08-16T00:00:00"
+  },
+  {
+    "title": "Sukkur Indus River Flood Surge",
+    "type": "flood",
+    "location": "Sukkur",
+    "severity": "high",
+    "status": "active",
+    "started_at": "2025-09-05T00:00:00"
+  },
+  {
+    "title": "Attock Rain Flood Situation",
+    "type": "flood",
+    "location": "Attock",
+    "severity": "medium",
+    "status": "active",
+    "started_at": "2025-05-08T08:10:00"
+  },
+  {
+    "title": "Chitral Glacial Lake Outburst Flood Risk",
+    "type": "flood",
+    "location": "Chitral",
+    "severity": "medium",
+    "status": "active",
+    "started_at": "2025-07-22T00:00:00"
+  },
+  {
+    "title": "Hyderabad Urban Rainstorm Waterlogging",
+    "type": "storm",
+    "location": "Hyderabad",
+    "severity": "low",
+    "status": "active",
+    "started_at": "2025-03-10T07:40:00"
+  },
+  {
+    "title": "Rahim Yar Khan Heat Fire Outbreak",
+    "type": "fire",
+    "location": "Rahim Yar Khan",
+    "severity": "low",
+    "status": "resolved",
+    "started_at": "2025-03-01T15:50:00"
+  },
+  {
+    "title": "Bahawalpur Desert Dust Storm",
+    "type": "storm",
+    "location": "Bahawalpur",
+    "severity": "high",
+    "status": "active",
+    "started_at": "2025-04-19T18:20:00"
+  },
+  {
+    "title": "Sialkot Heavy Rain Flood Damage",
+    "type": "flood",
+    "location": "Sialkot",
+    "severity": "medium",
+    "status": "resolved",
+    "started_at": "2025-02-18T13:30:00"
+  }
+]
