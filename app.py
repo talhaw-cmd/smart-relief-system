@@ -8,11 +8,13 @@ from routes.shelters import shelter_routes
 from routes.volunteers import volunteer_routes
 from routes.donations import donation_routes
 from routes.resources import resource_routes
+import os
+from dotenv import load_dotenv
 
 import bcrypt
 
 app = Flask(__name__)
-app.secret_key = "disaster-relief-secret-123" 
+app.secret_key = os.getenv("SECRET_KEY")
 
 register_auth_routes(app)
 disaster_routes(app)
